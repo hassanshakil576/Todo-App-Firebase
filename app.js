@@ -5,6 +5,7 @@ const form = document.querySelector("#form")
 const input = document.querySelector("#todo")
 const description = document.querySelector("#textarea")
 const div = document.querySelector(".container")
+const div2 = document.querySelector(".parent")
 
 
 const allTodo = [] //global array 
@@ -24,7 +25,7 @@ getData()
 
 //function for renderData
 function renderData(){
-  allTodo.map(item=>{
+  allTodo.map((item)=>{
     div.innerHTML += `<div class="children">
             Title: ${item.title}<br>
             Description: ${item.description}
@@ -35,9 +36,14 @@ function renderData(){
 
 form.addEventListener("submit" ,async (event) =>{ //yahan mujhy isko async function banana para kyun ke hamne neeche await use kiya hai because of try/catch
     event.preventDefault()
-    console.log(input.value);
+    console.log(input.value); 
     console.log(description.value);
-    //firebase function for adding data
+    div2.innerHTML = `<div class = "container-2">
+    Title: ${input.value}<br>
+    Description: ${description.value}
+    </div>
+    `
+   //firebase function for adding data
     try {
         const docRef = await addDoc(collection(db, "todos"), {
           title: input.value,
@@ -47,5 +53,6 @@ form.addEventListener("submit" ,async (event) =>{ //yahan mujhy isko async funct
       } catch (e) {
         console.error("Error adding document: ", e); //error miljayega agar koi error aya touu
       }
-      
+      input.value = ""
+      description.value = ""
 });
