@@ -73,10 +73,6 @@ editBtn.forEach((item, index) => {
 }
 
 
-
-
-
-
 form.addEventListener("submit" ,async (event) =>{ //yahan mujhy isko async function banana para kyun ke hamne neeche await use kiya hai because of try/catch
     event.preventDefault()
     console.log(input.value); 
